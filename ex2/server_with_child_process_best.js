@@ -1,5 +1,4 @@
 const http = require("http");
-const cluster = require("cluster");
 const child_process = require("child_process");
 
 let requestNumber = 1;
