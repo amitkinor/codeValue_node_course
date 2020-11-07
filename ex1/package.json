@@ -1,0 +1,20 @@
+{
+  "name": "Exercises",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start" : "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amitkinor/codeValue_node_course.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amitkinor/codeValue_node_course/issues"
+  },
+  "homepage": "https://github.com/amitkinor/codeValue_node_course#readme"
+}
