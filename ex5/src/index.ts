@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { router as productsRouter } from './routers/productsRouter';
 import { router as categoriesRouter } from './routers/categoriesRouter';
+import { request_err } from './error_handlers/request_err';
 
 const app = express();
 
@@ -10,8 +11,10 @@ app.use(cors());
 
 app.set('port', 8000);
 
-app.use('api/products', productsRouter);
-app.use('api/categories', categoriesRouter);
+app.use('/api/products', productsRouter);
+app.use('/api/categories', categoriesRouter);
+
+app.use(request_err);
 
 app.listen(app.get('port'), () => {
   console.log('Server is up');

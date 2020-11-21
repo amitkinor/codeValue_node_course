@@ -1,4 +1,6 @@
-import { Category, Product } from '../interfaces/interfaces';
+import { NextFunction, Request, Response } from 'express';
+import { Category } from '../interfaces/Catergory';
+import { Product } from '../interfaces/Product';
 import db from '../db_mock/defaultDb.json';
 import { v4 as uuid } from 'uuid';
 
@@ -7,7 +9,17 @@ export const newCategory = (name: string): Category => ({
   name,
 });
 
-export const validateId = (id: string): boolean => id.length !== 36;
+/**
+ * Id category structure validation middleware
+ */
+export const validateId = (req: Request, res: Response, next: NextFunction): void => {
+  const id: string = req.params.id;
+  if (id.length !== 36) {
+    next('Invalid Id');
+  } else {
+    next();
+  }
+};
 
 export const findCategory = (id: string): Category | undefined => db.catergories.find((category: Category) => category.id === id);
 

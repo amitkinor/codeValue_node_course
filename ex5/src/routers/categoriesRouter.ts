@@ -22,14 +22,8 @@ router.get('/', (req, res) => res.send(getCategories()));
 /**
  * Returns a specific category
  */
-router.get('/:id', (req: Request, res: Response) => {
+router.get('/:id', validateId, (req: Request, res: Response) => {
   const id: string = req.params.id;
-
-  //  Id structure validation
-  if (validateId(id)) {
-    res.status(400).end('Bad Request');
-    return;
-  }
 
   const findIt = findCategory(id);
 
@@ -41,15 +35,8 @@ router.get('/:id', (req: Request, res: Response) => {
   res.send(findIt);
 });
 
-router.get('/:id/products', (req: Request, res: Response) => {
+router.get('/:id/products', validateId, (req: Request, res: Response) => {
   const id: string = req.params.id;
-
-  //  Id structure validation
-  if (validateId(id)) {
-    res.status(400).end('Bad Request');
-    return;
-  }
-
   const products: Product[] = getCategoryProducts(id);
   products === [] ? res.status(404).end('Empty Category') : res.status(200).send(products);
 });
@@ -69,15 +56,9 @@ router.post('/', (req: Request, res: Response) => {
 /**
  * Updates a category
  */
-router.put('/:id', (req: Request, res: Response) => {
+router.put('/:id', validateId, (req: Request, res: Response) => {
   const payload = req.body;
   const id: string = req.params.id;
-
-  //  Id structure validation
-  if (validateId(id)) {
-    res.status(400).end('Bad Request');
-    return;
-  }
 
   const findIt: Category | undefined = findCategory(id);
 
@@ -94,14 +75,8 @@ router.put('/:id', (req: Request, res: Response) => {
 /**
  * Delete a category
  */
-router.delete('/:id', (req: Request, res: Response) => {
+router.delete('/:id', validateId, (req: Request, res: Response) => {
   const id: string = req.params.id;
-
-  //  Id structure validation
-  if (validateId(id)) {
-    res.status(400).end('Bad Request');
-    return;
-  }
 
   const categoryIndex = findCategoryIndex(id);
 

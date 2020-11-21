@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
-import { Product } from '../interfaces/interfaces';
+import { Product } from '../interfaces/product';
 import db from '../db_mock/defaultDb.json';
 import { v4 as uuid } from 'uuid';
+import { INPUT_VALIDATION_ERROR } from '../constants/constants';
 
 export const newProduct = (categoryId: string, name: string): Product => ({
   id: uuid(),
@@ -11,13 +12,12 @@ export const newProduct = (categoryId: string, name: string): Product => ({
 });
 
 /**
- * Id structure validation
+ * Id product structure validation middleware
  */
 export const validateId = (req: Request, res: Response, next: NextFunction): void => {
   const id: string = req.params.id;
   if (id.length !== 36) {
-    res.status(400).end('Bad Request');
-    return;
+    next(INPUT_VALIDATION_ERROR);
   } else {
     next();
   }
