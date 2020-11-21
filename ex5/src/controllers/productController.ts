@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { Product } from '../interfaces/product';
 import db from '../db_mock/defaultDb.json';
 import { v4 as uuid } from 'uuid';
-import { INPUT_VALIDATION_ERROR } from '../constants/constants';
+import { ID_VALIDATION_ERROR, NAME_VALIDATION_ERROR } from '../constants/constants';
 
 export const newProduct = (categoryId: string, name: string): Product => ({
   id: uuid(),
@@ -12,20 +12,34 @@ export const newProduct = (categoryId: string, name: string): Product => ({
 });
 
 /**
- * Id product structure validation middleware
+ * Product ID structure validation middleware
  */
 export const validateId = (req: Request, res: Response, next: NextFunction): void => {
   const id: string = req.params.id;
   if (id.length !== 36) {
-    next(INPUT_VALIDATION_ERROR);
+    next(ID_VALIDATION_ERROR);
   } else {
     next();
   }
 };
 
-export const validateName = (name: string): boolean => name.length < 3;
+/**
+ * Product Name structure validation middleware
+ */
+export function validateName(req: Request, res: Response, next: NextFunction): void {
+  const payload = req.body;
+  payload && payload.name.length < 3 ? next(NAME_VALIDATION_ERROR) : next();
+}
 
 export const findProduct = (id: string): Product | undefined => db.products.find((product: Product) => product.id === id);
+// export const findProduct = (id: string): Promise<Product | string> => {
+//   const product: Product | undefined = db.products.find((product: Product) => product.id === id);
+//   if (product) {
+//     return Promise.resolve(product);
+//   } else {
+//     return Promise.reject('No product found');
+//   }
+// };
 
 export const findProductIndex = (id: string): number => db.products.findIndex((product: Product) => product.id === id);
 

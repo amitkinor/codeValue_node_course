@@ -37,14 +37,8 @@ router.get('/:id', validateId, (req: Request, res: Response) => {
 /**
  * Adds a product
  */
-router.post('/', (req: Request, res: Response) => {
+router.post('/', validateName, (req: Request, res: Response) => {
   const payload = req.body;
-
-  // Name validation
-  if (validateName(payload.name)) {
-    res.status(409).send('Invalid Name');
-    return;
-  }
 
   // Create & store a new product
   const product = newProduct('ec9714ea-abb0-499e-9042-d8292bbf45bc', payload.name);
@@ -55,15 +49,9 @@ router.post('/', (req: Request, res: Response) => {
 /**
  * Updates a product
  */
-router.put('/:id', validateId, (req: Request, res: Response) => {
+router.put('/:id', validateId, validateName, (req: Request, res: Response) => {
   const payload = req.body;
   const id: string = req.params.id;
-
-  // Name validation
-  if (validateName(payload.name)) {
-    res.status(409).send('Invalid Name');
-    return;
-  }
 
   const findIt: Product | undefined = findProduct(id);
 
