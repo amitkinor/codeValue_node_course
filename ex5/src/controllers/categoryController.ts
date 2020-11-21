@@ -3,6 +3,7 @@ import { Category } from '../interfaces/Catergory';
 import { Product } from '../interfaces/Product';
 import db from '../db_mock/defaultDb.json';
 import { v4 as uuid } from 'uuid';
+import { NO_CATEGORY_FOUND } from '../constants/constants';
 
 export const newCategory = (name: string): Category => ({
   id: uuid(),
@@ -22,6 +23,14 @@ export const validateId = (req: Request, res: Response, next: NextFunction): voi
 };
 
 export const findCategory = (id: string): Category | undefined => db.catergories.find((category: Category) => category.id === id);
+
+export const findCategoryAsync = (id: string): Promise<Category | string> =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const category: Category | undefined = db.catergories.find((category: Category) => category.id === id);
+      category ? resolve(category) : reject(NO_CATEGORY_FOUND);
+    }, 2000);
+  });
 
 export const findCategoryIndex = (id: string): number => db.catergories.findIndex((category: Category) => category.id === id);
 

@@ -1,8 +1,9 @@
-import { Request, Response, Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 import { Product } from '../interfaces/product';
 import {
   newProduct,
   findProduct,
+  findProductAsync,
   findProductIndex,
   validateId,
   validateName,
@@ -21,17 +22,14 @@ router.get('/', (req, res) => res.status(200).send(getProducts()));
 /**
  * Returns a specific product
  */
-router.get('/:id', validateId, (req: Request, res: Response) => {
+router.get('/:id', validateId, async (req: Request, res: Response, next: NextFunction) => {
   const id: string = req.params.id;
-
-  const findIt = findProduct(id);
-
-  // Handling missing product
-  if (findIt === undefined) {
-    res.status(404).send('no product was found');
-    return;
+  try {
+    const product: Product | string = await findProductAsync(id);
+    res.status(200).send(product);
+  } catch (err) {
+    next(err);
   }
-  res.send(findIt);
 });
 
 /**

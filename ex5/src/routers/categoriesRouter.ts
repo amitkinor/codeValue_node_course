@@ -1,10 +1,11 @@
-import { Request, Response, Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 import { Category } from '../interfaces/Catergory';
 import { Product } from '../interfaces/Product';
 import {
   addCategory,
   deleteCategory,
   findCategory,
+  findCategoryAsync,
   findCategoryIndex,
   getCategories,
   newCategory,
@@ -22,17 +23,14 @@ router.get('/', (req, res) => res.send(getCategories()));
 /**
  * Returns a specific category
  */
-router.get('/:id', validateId, (req: Request, res: Response) => {
+router.get('/:id', validateId, async (req: Request, res: Response, next: NextFunction) => {
   const id: string = req.params.id;
-
-  const findIt = findCategory(id);
-
-  // Handling missing category
-  if (findIt === undefined) {
-    res.status(404).send('No category was found');
-    return;
+  try {
+    const category: Category | string = await findCategoryAsync(id);
+    res.send(category);
+  } catch (err) {
+    next(err);
   }
-  res.send(findIt);
 });
 
 router.get('/:id/products', validateId, (req: Request, res: Response) => {

@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { Product } from '../interfaces/product';
 import db from '../db_mock/defaultDb.json';
 import { v4 as uuid } from 'uuid';
-import { ID_VALIDATION_ERROR, NAME_VALIDATION_ERROR } from '../constants/constants';
+import { ID_VALIDATION_ERROR, NAME_VALIDATION_ERROR, NO_PRODUCT_FOUND } from '../constants/constants';
 
 export const newProduct = (categoryId: string, name: string): Product => ({
   id: uuid(),
@@ -32,14 +32,14 @@ export function validateName(req: Request, res: Response, next: NextFunction): v
 }
 
 export const findProduct = (id: string): Product | undefined => db.products.find((product: Product) => product.id === id);
-// export const findProduct = (id: string): Promise<Product | string> => {
-//   const product: Product | undefined = db.products.find((product: Product) => product.id === id);
-//   if (product) {
-//     return Promise.resolve(product);
-//   } else {
-//     return Promise.reject('No product found');
-//   }
-// };
+
+export const findProductAsync = (id: string): Promise<Product | string> =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const product: Product | undefined = db.products.find((product: Product) => product.id === id);
+      product ? resolve(product) : reject(NO_PRODUCT_FOUND);
+    }, 2000);
+  });
 
 export const findProductIndex = (id: string): number => db.products.findIndex((product: Product) => product.id === id);
 
