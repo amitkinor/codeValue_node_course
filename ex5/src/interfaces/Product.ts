@@ -4,8 +4,3 @@ export interface Product {
   name: string;
   itemsInStock: number;
 }
-
-export interface Category {
-  id: string;
-  name: string;
-}

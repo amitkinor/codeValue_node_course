@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import { Product } from '../interfaces/interfaces';
+import { Product } from '../interfaces/product';
 import {
   newProduct,
   findProduct,

@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express';
-import { Category, Product } from '../interfaces/interfaces';
+import { Category } from '../interfaces/Catergory';
+import { Product } from '../interfaces/Product';
 import {
   addCategory,
   deleteCategory,
