@@ -6,6 +6,7 @@ import { router as categoriesRouter } from './routers/categoriesRouter';
 import * as request_err from './error_handlers/request_err';
 import { appErrorLogger, appLogger } from './loggers/loggers';
 import { getConfigValue } from './config/config';
+import { init } from './controllers/dbController';
 
 const app = express();
 
@@ -40,6 +41,11 @@ app.use(appErrorLogger);
  */
 app.use(request_err.id_err);
 app.use(request_err.name_err);
+
+/**
+ * Mock Db connection using fetch node
+ */
+init();
 
 app.listen(app.get('port'), () => {
   console.log('Server is up');
