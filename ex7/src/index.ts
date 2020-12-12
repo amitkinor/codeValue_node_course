@@ -6,7 +6,7 @@ import { router as categoriesRouter } from './routers/categoriesRouter';
 import * as request_err from './error_handlers/request_err';
 import { appErrorLogger, appLogger } from './loggers/loggers';
 import { getConfigValue } from './config/config';
-import { initA } from './controllers/dbController';
+import { init } from './controllers/dbController';
 import { Idb } from './interfaces/db';
 
 const app = express();
@@ -21,11 +21,10 @@ app.use(cors());
 export let db: Idb;
 
 async function initDb() {
-  db = await initA();
+  db = await init();
 }
 
-initDb(); // how th f*ck does it suddenly work now ?
-// should'nt all the function that calls db be async?
+initDb();
 
 app.set('port', getConfigValue('APP_PORT') || 8000);
 
