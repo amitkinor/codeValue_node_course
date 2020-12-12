@@ -1,0 +1,48 @@
+{
+  "products": [
+    {
+      "id": "3ef12440-4467-4213-8517-e04743bf1537",
+      "categoryId": "ec9714ea-abb0-499e-9042-d8292bbf45bc",
+      "name": "prod1",
+      "itemsInStock": 1
+    },
+    {
+      "id": "16fcebc8-048f-4ad3-939e-9595828ea556",
+      "categoryId": "ec9714ea-abb0-499e-9042-d8292bbf45bc",
+      "name": "prod2",
+      "itemsInStock": 2
+    },
+    {
+      "id": "7f0621b9-7d7a-465a-b29d-4f153a8b4138",
+      "categoryId": "7a2b525d-a75b-442f-84dc-4d56f2651266",
+      "name": "prod3",
+      "itemsInStock": 3
+    },
+    {
+      "id": "ec7ff5d8-1a1b-42e7-b190-aa0181717050",
+      "categoryId": "7a2b525d-a75b-442f-84dc-4d56f2651266",
+      "name": "prod4",
+      "itemsInStock": 4
+    },
+    {
+      "id": "15c6adb1-470e-4bbf-b1c7-aebc75a56c2b",
+      "categoryId": "9d6a349b-f4d0-45ee-9fbf-40742ab72fa0",
+      "name": "prod5",
+      "itemsInStock": 5
+    }
+  ],
+  "categories": [
+    {
+      "id": "ec9714ea-abb0-499e-9042-d8292bbf45bc",
+      "name": "cat1"
+    },
+    {
+      "id": "7a2b525d-a75b-442f-84dc-4d56f2651266",
+      "name": "cat2"
+    },
+    {
+      "id": "9d6a349b-f4d0-45ee-9fbf-40742ab72fa0",
+      "name": "cat3"
+    }
+  ]
+}
