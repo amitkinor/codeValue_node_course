@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { Category } from '../interfaces/Catergory';
 import { Product } from '../interfaces/Product';
-import db from '../db_mock/defaultDb.json';
+import { db } from '../index';
 import { v4 as uuid } from 'uuid';
 import { NO_CATEGORY_FOUND } from '../constants/constants';
 
@@ -22,19 +22,19 @@ export const validateId = (req: Request, res: Response, next: NextFunction): voi
   }
 };
 
-export const findCategory = (id: string): Category | undefined => db.catergories.find((category: Category) => category.id === id);
+export const findCategory = (id: string): Category | undefined => db.categories.find((category: Category) => category.id === id);
 
 export const findCategoryAsync = (id: string): Promise<Category | string> =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
-      const category: Category | undefined = db.catergories.find((category: Category) => category.id === id);
+      const category: Category | undefined = db.categories.find((category: Category) => category.id === id);
       category ? resolve(category) : reject(NO_CATEGORY_FOUND);
     }, 2000);
   });
 
-export const findCategoryIndex = (id: string): number => db.catergories.findIndex((category: Category) => category.id === id);
+export const findCategoryIndex = (id: string): number => db.categories.findIndex((category: Category) => category.id === id);
 
-export const getCategories = (): Category[] => db.catergories;
+export const getCategories = (): Category[] => db.categories;
 
 export const getCategoryProducts = (id: string): Product[] => {
   const products: Product[] = [];
@@ -42,6 +42,6 @@ export const getCategoryProducts = (id: string): Product[] => {
   return products;
 };
 
-export const addCategory = (category: Category): number => db.catergories.push(category);
+export const addCategory = (category: Category): number => db.categories.push(category);
 
-export const deleteCategory = (categoryIndex: number): Category[] => db.catergories.splice(categoryIndex, 1);
+export const deleteCategory = (categoryIndex: number): Category[] => db.categories.splice(categoryIndex, 1);

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { Product } from '../interfaces/product';
-import db from '../db_mock/defaultDb.json';
+import { db } from '../index';
 import { v4 as uuid } from 'uuid';
 import { ID_VALIDATION_ERROR, NAME_VALIDATION_ERROR, NO_PRODUCT_FOUND } from '../constants/constants';
 import { productIdSchema, productNameSchema } from '../schemas/productSchema';
