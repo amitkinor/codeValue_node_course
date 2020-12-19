@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { DbProductType } from '../mongoSchemas/ProductSchema';
+import { DbProductType } from '../db/mongoSchemas/ProductSchema';
 import mongodb from 'mongodb';
 import {
   newProduct,

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import mongodb from 'mongodb';
-import { DbProduct, DbProductType } from '../mongoSchemas/ProductSchema';
-import { DbCategory, DbCategoryType } from '../mongoSchemas/CategorySchema';
+import { DbProduct, DbProductType } from '../db/mongoSchemas/ProductSchema';
+import { DbCategory, DbCategoryType } from '../db/mongoSchemas/CategorySchema';
 import { v4 as uuid } from 'uuid';
 
 export const newCategory = (name: string): DbCategoryType => {

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import mongodb from 'mongodb';
-import { DbCategoryType } from '../mongoSchemas/CategorySchema';
-import { DbProductType } from '../mongoSchemas/ProductSchema';
+import { DbCategoryType } from '../db/mongoSchemas/CategorySchema';
+import { DbProductType } from '../db/mongoSchemas/ProductSchema';
 import {
   addCategory,
   deleteCategory,

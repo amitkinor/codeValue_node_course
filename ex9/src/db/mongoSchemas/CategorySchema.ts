@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { Category } from '../interfaces/Catergory';
+import { Category } from '../../interfaces/Catergory';
 
 const schema = new mongoose.Schema({
   id: String,

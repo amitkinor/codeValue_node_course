@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
-import { DbProduct, DbProductType } from '../mongoSchemas/ProductSchema';
+import { DbProduct, DbProductType } from '../db/mongoSchemas/ProductSchema';
 import { v4 as uuid } from 'uuid';
 import { ID_VALIDATION_ERROR, NAME_VALIDATION_ERROR } from '../constants/constants';
-import { productIdSchema, productNameSchema } from '../schemas/productSchema';
+import { productIdSchema, productNameSchema } from '../db/schemas/productSchema';
 import mongodb from 'mongodb';
 
 export const newProduct = (categoryId: string, name: string): DbProductType => {
