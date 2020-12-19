@@ -48,7 +48,15 @@ export const findProduct = async (id: mongodb.ObjectID): Promise<DbProductType |
 
 export const getProducts = async (): Promise<DbProductType[]> => await DbProduct.find({}).exec();
 
-export const addProduct = async (product: DbProductType): Promise<DbProductType> => await product.save();
+export const addProduct = async (product: DbProductType): Promise<DbProductType> => {
+  return new Promise((resolve, reject) => {
+    try {
+      resolve(product.save());
+    } catch (err) {
+      reject(console.log('Error while saving the product : ', err));
+    }
+  });
+};
 
 export const deleteProduct = async (product: DbProductType): Promise<void> => product.remove();
 

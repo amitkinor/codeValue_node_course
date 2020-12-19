@@ -41,7 +41,7 @@ router.post('/', validateName, async (req: Request, res: Response) => {
   const payload = req.body;
 
   // Create & store a new product
-  const product = newProduct('ec9714eaabb0499e9042d8292bbf45bc', payload.name);
+  const product = newProduct('5fa3117a6cd4373d6046a15d', payload.name);
   await addProduct(product);
   res.status(201).send(product);
 });

@@ -3,7 +3,6 @@ import mongodb from 'mongodb';
 import { DbProduct, DbProductType } from '../mongoSchemas/ProductSchema';
 import { DbCategory, DbCategoryType } from '../mongoSchemas/CategorySchema';
 import { v4 as uuid } from 'uuid';
-import { NO_CATEGORY_FOUND } from '../constants/constants';
 
 export const newCategory = (name: string): DbCategoryType => {
   return new DbCategory({
